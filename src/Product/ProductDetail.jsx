@@ -65,6 +65,9 @@ const ProductDetail = () => {
       let form = document.querySelector("form");
       let table = document.querySelector("table");
       let addNewProductBtn = document.querySelector(".addnewproductBtn");
+      let h1 = document.querySelector(".main_heading");
+
+      h1.style.filter = "blur(0px)";
       table.style.filter = "blur(0px)";
       addNewProductBtn.style.display = "block";
       form.style.display = "none";
@@ -108,6 +111,10 @@ const ProductDetail = () => {
     let form = document.querySelector("form");
     let table = document.querySelector("table");
     let addNewProductBtn = document.querySelector(".addnewproductBtn");
+    let h1 = document.querySelector(".main_heading");
+
+    h1.style.filter = "blur(4px)";
+
     table.style.filter = "blur(4px)";
     addNewProductBtn.style.display = "none";
     form.style.display = "block";
@@ -124,6 +131,9 @@ const ProductDetail = () => {
     let form = document.querySelector("form");
     let table = document.querySelector("table");
     let addNewProductBtn = document.querySelector(".addnewproductBtn");
+    let h1 = document.querySelector(".main_heading");
+
+    h1.style.filter = "blur(0px)";
     table.style.filter = "blur(0px)";
     addNewProductBtn.style.display = "block";
     form.style.display = "none";
@@ -132,7 +142,9 @@ const ProductDetail = () => {
   return (
     <>
       <div id="main_container">
-      <h1>{`Total Products are`} <span>{rows.length}</span></h1>
+        <h1 className="main_heading">
+          {`Total Products are`} <span>{rows.length}</span>
+        </h1>
         <table>
           <thead>
             <tr>
