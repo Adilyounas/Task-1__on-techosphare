@@ -97,7 +97,6 @@ const ProductDetail = () => {
         let saveBtn = document.querySelector(".saveBtn");
         saveBtn.style.backgroundColor = "rgb(209, 209, 209)";
         saveBtn.style.color = "rgb(168, 168, 168)";
-
         saveBtn.disabled = true;
       }
     } else {
