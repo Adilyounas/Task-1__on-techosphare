@@ -203,7 +203,7 @@ const ProductDetail = () => {
             />
             <input
               required
-              onChange={(e) => setProductPrice(parseInt(e.target.value))}
+              onChange={(e) => setProductPrice(parseFloat(e.target.value))}
               value={productPrice > 0 ? productPrice : ""}
               type="number"
               placeholder="Enter Price"
