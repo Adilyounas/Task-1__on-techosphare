@@ -193,6 +193,7 @@ const ProductDetail = () => {
               value={productName}
               type="string"
               placeholder="Enter Product Name"
+              maxLength="35"
             />
             <input
               required
@@ -200,6 +201,7 @@ const ProductDetail = () => {
               value={productQty > 0 ? productQty : ""}
               type="number"
               placeholder="Enter Product Quantity"
+              max={"1000"}
             />
             <input
               required
@@ -207,6 +209,7 @@ const ProductDetail = () => {
               value={productPrice > 0 ? productPrice : ""}
               type="number"
               placeholder="Enter Price"
+              max={"1000000"}
             />
             <input required onChange={handleFileChange} type="file" />
             <button type="submit" disabled className="saveBtn">
