@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 //todo <----------------------Other file imports--------------------------->
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
@@ -17,9 +17,14 @@ let generatedId = "";
 
 const ProductDetail = () => {
   //todo <----------------------useStates hooks--------------------------->
-  const row = JSON.parse(window.sessionStorage.getItem("rows"))
+  // const row = JSON.parse(window.sessionStorage.getItem("rows"));
+
+  const row = useMemo(() => {
+    return JSON.parse(window.sessionStorage.getItem("rows"));
+  }, []);
 
   const [rows, setRows] = useState(row);
+
   const [images, setImages] = useState([]);
   const [userSelectFile, setUserSelectFile] = useState(false);
   const [productIdValue, setProductIdValue] = useState("");
@@ -27,7 +32,6 @@ const ProductDetail = () => {
   const [productQty, setProductQty] = useState(0);
   const [productPrice, setProductPrice] = useState(0);
   const [filteredValuesState, setFilterValuesState] = useState([]);
-
 
   //todo <----use variable like useState hook so that code use it many time with different values------>
   let productIdMatched = false;
@@ -47,7 +51,8 @@ const ProductDetail = () => {
     productName !== "" &&
     productQty > 0 &&
     productPrice > 0 &&
-    userSelectFile && images.length>0
+    userSelectFile &&
+    images.length > 0
   ) {
     setTimeout(() => {
       let saveBtn = document.querySelector("#saveBtn");
@@ -130,19 +135,19 @@ const ProductDetail = () => {
       };
 
       // setRows((old) => [...old, obj]);
-      rows.push(obj)
+      rows.push(obj);
 
-      let strRows = JSON.stringify(rows)
-      window.sessionStorage.setItem('rows',strRows);
-
+      let strRows = JSON.stringify(rows);
+      window.sessionStorage.setItem("rows", strRows);
 
       setProductName("");
       setProductQty(0);
       setProductPrice(0);
-      setImages([])
+      setImages([]);
 
-
-     
+      if (row && row.length) {
+        setRows(row);
+      }
 
       if (true) {
         //* this code will turn button again disabled, automatically if the form is submited
@@ -232,11 +237,15 @@ const ProductDetail = () => {
       return ele.id !== id;
     });
     setRows(filteredValue);
-    
-    let strRows = JSON.stringify(filteredValue)
-    window.sessionStorage.setItem('rows',strRows);
-    
+
+    let strRows = JSON.stringify(filteredValue);
+    window.sessionStorage.setItem("rows", strRows);
   };
+
+  React.useEffect(() => {
+    setRows(row);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once after initial render
 
   return (
     <>
