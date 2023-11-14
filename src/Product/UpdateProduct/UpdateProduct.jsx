@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./updateproduct.css";
 import CloseIcon from "@mui/icons-material/Close";
 
-const UpdateProduct = ({ filteredValuesState, rows, setRows }) => {
+const UpdateProduct = ({ filteredValuesState,setRows,rowsData }) => {
   //todo <----------------------User state hooks--------------------------->
-
+console.log(filteredValuesState);
   const [updateIdValue, setUpdateIdValue] = useState(undefined);
   const [updateProductName, setUpdateProductName] = useState("");
   const [updateProductQty, setUpdateProductQty] = useState(0);
@@ -68,31 +68,13 @@ const UpdateProduct = ({ filteredValuesState, rows, setRows }) => {
   const form2SubmitHandlelr = (e) => {
     e.preventDefault();
 
-    // if (filteredValuesState.id === updateIdValue) {
-    //   return;
-    // }
+    let uniqueId = filteredValuesState.id
 
-    // if (filteredValuesState.id !== updateIdValue) {
-    //   rows.forEach((ele) => {
-    //     if (ele.id === updateIdValue) {
-    //       productIdMatched = true;
 
-    //       return toast.error("Id Exist Try an Other", { duration: 5000 });
-    //     }
-    //   });
-    // }
-
-    const removeMatchedVal = rows.filter((ele) => {
-      return ele.id !== filteredValuesState.id;
-    });
-
-    let strRows = JSON.stringify(removeMatchedVal);
-    window.sessionStorage.setItem("rows", strRows);
-
-    setRows(removeMatchedVal); //this will remove the the old values
+    // setRows(removeMatchedVal); //this will remove the the old values
 
     let obj = {
-      id: filteredValuesState.id,
+      id: uniqueId,
       productName:
         updateProductName === ""
           ? filteredValuesState.productName
@@ -108,13 +90,28 @@ const UpdateProduct = ({ filteredValuesState, rows, setRows }) => {
           : updateProductImages,
     };
 
-    const row = JSON.parse(window.sessionStorage.getItem("rows"));
-    row.push(obj);
+    const rows = JSON.parse(window.sessionStorage.getItem("rows"));
+    const removeMatchedVal = rows.filter((ele) => {
+      return ele.id !== filteredValuesState.id;
+    });
 
-    strRows = JSON.stringify(row);
-    window.sessionStorage.setItem("rows", strRows);
+    window.sessionStorage.setItem("rows", JSON.stringify(removeMatchedVal));
 
-    setRows((old) => [...old, obj]);
+    const rows2 = JSON.parse(window.sessionStorage.getItem("rows"));
+
+    // setRows(rows)
+    
+    
+    
+    rows2.push(obj);
+
+    
+    
+    window.sessionStorage.setItem("rows", JSON.stringify(rows2));
+    // setRows(rows)
+    console.log(rows);
+    
+    // setRows((old) => [...old, obj]);
 
     let form2Container = document.querySelector("#updateProduct_Container");
     form2Container.style.zIndex = -1;
@@ -169,6 +166,8 @@ const UpdateProduct = ({ filteredValuesState, rows, setRows }) => {
       updateBtn.disabled = true;
     }
   }
+
+
 
   return (
     <div id="updateProduct_Container">

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, {  useState } from "react";
 
 //todo <----------------------Other file imports--------------------------->
 import UpdateProduct from "./UpdateProduct/UpdateProduct";
@@ -14,16 +14,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 let generatedId = "";
+let getRowDataSessionStorage = JSON.parse(window.sessionStorage.getItem("rows"));
+let sessionStorageData
+
+if (getRowDataSessionStorage) {
+  sessionStorageData = getRowDataSessionStorage
+  
+}else{
+  sessionStorageData = []
+}
 
 const ProductDetail = () => {
   //todo <----------------------useStates hooks--------------------------->
-  // const row = JSON.parse(window.sessionStorage.getItem("rows"));
 
-  const row = useMemo(() => {
-    return JSON.parse(window.sessionStorage.getItem("rows"));
-  }, []);
+  //  JSON.parse(window.sessionStorage.getItem("rows"));
+  // const row = useMemo(() => {
+  // }, []);
 
-  const [rows, setRows] = useState(row);
+  const [rows,setRows] = useState(sessionStorageData);
 
   const [images, setImages] = useState([]);
   const [userSelectFile, setUserSelectFile] = useState(false);
@@ -145,9 +153,9 @@ const ProductDetail = () => {
       setProductPrice(0);
       setImages([]);
 
-      if (row && row.length) {
-        setRows(row);
-      }
+      // if (row && row.length) {
+      //   setRows(row);
+      // }
 
       if (true) {
         //* this code will turn button again disabled, automatically if the form is submited
@@ -236,22 +244,24 @@ const ProductDetail = () => {
     const filteredValue = rows.filter((ele) => {
       return ele.id !== id;
     });
-    setRows(filteredValue);
+    // setRows(filteredValue);
 
     let strRows = JSON.stringify(filteredValue);
     window.sessionStorage.setItem("rows", strRows);
   };
 
-  React.useEffect(() => {
-    setRows(row);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once after initial render
+  // React.useEffect(() => {
+  //   setRows(getRowDataSessionStorage);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getRowDataSessionStorage]); // Only run once after initial render
+
 
   return (
     <>
       <div id="main_container">
         <h1 className="main_heading">
-          {`Total Products are`} <span>{rows.length}</span>
+       
+          
         </h1>
         <table>
           <thead>
@@ -266,7 +276,7 @@ const ProductDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {rows.length > 0 &&
+            {rows && rows.length > 0 &&
               rows.map((ele, index) => (
                 <tr key={ele.id}>
                   <td>{index + 1}</td>
@@ -363,7 +373,7 @@ const ProductDetail = () => {
           </form>
         </div>
         <UpdateProduct
-          rows={rows}
+          rows={sessionStorageData}
           setRows={setRows}
           filteredValuesState={filteredValuesState}
         />
