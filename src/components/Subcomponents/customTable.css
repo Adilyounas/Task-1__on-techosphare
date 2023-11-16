@@ -1,0 +1,12 @@
+.EditandDeleteIcon{
+    color: black;
+    font-size: 27px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+
+.EditandDeleteIcon:hover{
+    color: red;
+    scale: 1.5;
+}

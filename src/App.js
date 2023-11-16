@@ -1,12 +1,11 @@
 import "./App.css";
-import ProductDetail from "./Product/ProductDetail";
-import { Toaster } from 'react-hot-toast';
+import Home from "./components/Home";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <div className="App">
-    <ProductDetail />
-
-    <Toaster />
+      <Home />
+      <Toaster />
     </div>
   );
 }
