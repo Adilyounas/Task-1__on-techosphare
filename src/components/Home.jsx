@@ -47,18 +47,17 @@ const Home = () => {
     file: [],
   });
 
-  console.log(editFormData);
 
   const dialogHandler = () => {
     setFormClose(!formOpen);
     setFormData((old) => ({ ...old, id: uuidv4() }));
     setFormData((old) => ({
-        ...old,
-        name: "",
-        price: "",
-        qty: "",
-        file: [],
-      }));
+      ...old,
+      name: "",
+      price: "",
+      qty: "",
+      file: [],
+    }));
     setDisabled(true);
 
   };
@@ -152,6 +151,7 @@ const Home = () => {
       file: ele.file,
     }));
     setEditFormOpen(!editFormOpen);
+    setUpdateDisabled(true)
   };
 
   const editFormChangeHandler = (e) => {
@@ -172,7 +172,7 @@ const Home = () => {
     } else {
       const files = e.target.files;
       let updateImagesVar = [];
-      console.log(updateImagesVar);
+      // console.log(updateImagesVar);
 
       if (files && files.length > 0) {
         Array.from(files).forEach((file) => {
@@ -216,7 +216,7 @@ const Home = () => {
 
   //todo   <------------------------------------   USEEFFECT ----------------------------------->
 
-  React.useEffect(() => {}, [formOpen, ItemDelete, disabled]);
+  React.useEffect(() => { }, [formOpen, ItemDelete, disabled]);
   return (
     <>
       <Box

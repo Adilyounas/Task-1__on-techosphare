@@ -84,8 +84,8 @@ const Form = (props) => {
                 id="formImages"
               >
                 {formData.file &&
-                  formData.file.map((ele) => (
-                    <div>
+                  formData.file.map((ele,index) => (
+                    <div key={index}>
                       <img src={ele} alt="" width={"70px"} style={{borderRadius:"7px"}}/>
                     </div>
                   ))}

@@ -21,8 +21,8 @@ const EditRowForm = (props) => {
         <Box
           component={"div"}
           width={"450px"}
-        maxWidth={"460px"}
-        minWidth={"360px"}
+          maxWidth={"460px"}
+          minWidth={"360px"}
         >
           <Box
             component={"form"}
