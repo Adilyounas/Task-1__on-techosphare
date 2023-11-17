@@ -47,7 +47,6 @@ const Home = () => {
     file: [],
   });
 
-
   const dialogHandler = () => {
     setFormClose(!formOpen);
     setFormData((old) => ({ ...old, id: uuidv4() }));
@@ -59,7 +58,6 @@ const Home = () => {
       file: [],
     }));
     setDisabled(true);
-
   };
 
   const dialogChangeHandler = (e) => {
@@ -151,7 +149,7 @@ const Home = () => {
       file: ele.file,
     }));
     setEditFormOpen(!editFormOpen);
-    setUpdateDisabled(true)
+    setUpdateDisabled(true);
   };
 
   const editFormChangeHandler = (e) => {
@@ -216,7 +214,7 @@ const Home = () => {
 
   //todo   <------------------------------------   USEEFFECT ----------------------------------->
 
-  React.useEffect(() => { }, [formOpen, ItemDelete, disabled]);
+  React.useEffect(() => {}, [formOpen, ItemDelete, disabled]);
   return (
     <>
       <Box
